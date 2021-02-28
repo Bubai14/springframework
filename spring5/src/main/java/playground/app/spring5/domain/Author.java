@@ -3,6 +3,7 @@
  */
 package playground.app.spring5.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -25,7 +26,7 @@ public class Author {
 	private String lastName;
 	
 	@ManyToMany(mappedBy = "authors")
-	private Set<Book> books;
+	private Set<Book> books = new HashSet<>();
 	
 	
 	/**
@@ -33,6 +34,17 @@ public class Author {
 	 */
 	public Author() {
 	}
+
+	
+	/**
+	 * @param firstName
+	 * @param lastName
+	 */
+	public Author(String firstName, String lastName) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
 
 
 	/**

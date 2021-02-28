@@ -3,6 +3,7 @@
  */
 package playground.app.spring5.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 /**
  * @author bubaibal
@@ -28,13 +30,27 @@ public class Book {
 
 	@ManyToMany
 	@JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "author_id"))
-	private Set<Author> authors;
+	private Set<Author> authors = new HashSet<>();
 
+	@ManyToOne
+	private Publisher publisher;
+	
 	/**
 	 * 
 	 */
 	public Book() {
 	}
+
+	
+	/**
+	 * @param title
+	 * @param isbn
+	 */
+	public Book(String title, String isbn) {
+		this.title = title;
+		this.isbn = isbn;
+	}
+
 
 	/**
 	 * @param title
@@ -102,6 +118,24 @@ public class Book {
 	public void setAuthors(Set<Author> authors) {
 		this.authors = authors;
 	}
+
+	
+	
+	/**
+	 * @return the publisher
+	 */
+	public Publisher getPublisher() {
+		return publisher;
+	}
+
+
+	/**
+	 * @param publisher the publisher to set
+	 */
+	public void setPublisher(Publisher publisher) {
+		this.publisher = publisher;
+	}
+
 
 	@Override
 	public int hashCode() {
